@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Playfair_Display } from "next/font/google";
-import { IBM_Plex_Mono } from "next/font/google";
+import { Playfair_Display, Space_Mono } from "next/font/google";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/styles/globals.css";
 import "@/styles/custom.scss";
@@ -12,22 +11,16 @@ import AnimateOnScroll from "@/components/AnimateOnScroll";
 import BackToTop from "@/components/BackToTop";
 import { Suspense } from "react";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-montserrat",
-});
-
 const playfair_display = Playfair_Display({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-playfair-display",
 });
 
-const mono = IBM_Plex_Mono({
+const mono = Space_Mono({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ibm-plex-mono",
+  weight: ["400", "700"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
