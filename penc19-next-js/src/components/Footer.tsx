@@ -79,8 +79,8 @@ export default async function Footer() {
                   .url()}
                 width={200}
                 height={0}
-                alt="Hepo Dakar"
-                title="Hepo Dakar"
+                alt="Penc 19"
+                title="Penc 19"
                 className="img-fluid mb-3"
               />
             )}
@@ -146,7 +146,7 @@ export default async function Footer() {
 
       <div className="container">
         <div className="text-center py-5">
-          <p>© 2025 FKT Consulting</p>
+          <p>© 2025 Penc 19</p>
           <ul className="list-unstyled d-flex justify-content-center footer__social">
             {siteSettings.twitter && (
               <li>

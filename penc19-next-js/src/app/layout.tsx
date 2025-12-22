@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@/styles/globals.css";
 import "@/styles/custom.scss";
@@ -23,6 +24,12 @@ const playfair_display = Playfair_Display({
   variable: "--font-playfair-display",
 });
 
+const mono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-ibm-plex-mono",
+});
+
 export const metadata: Metadata = {
   title: {
     template: "%s | Penc 19",
@@ -39,7 +46,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="fr" className={playfair_display.variable}>
-      <body className={`${montserrat.className}`}>
+      <body className={`${mono.className}`}>
         <Header />
         <main>{children}</main>
         <Footer />
