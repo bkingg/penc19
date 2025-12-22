@@ -1,0 +1,30 @@
+.page__header {
+  position: relative;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  color: map.get($theme-colors, "light");
+
+  @include media-breakpoint-up(sm) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
+.breadcrumb {
+  text-align: center;
+  text-transform: uppercase;
+  justify-content: center;
+  .breadcrumb-item + .breadcrumb-item::before {
+    font-family: "bootstrap-icons";
+    font-weight: bold;
+    color: map.get($theme-colors, "light");
+  }
+  .breadcrumb-item {
+    color: map.get($theme-colors, "light");
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      color: map.get($theme-colors, "light");
+    }
+  }
+}

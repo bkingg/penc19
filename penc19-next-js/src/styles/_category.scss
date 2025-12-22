@@ -1,0 +1,147 @@
+.category {
+  position: relative;
+  text-decoration: none;
+  &__title {
+    font-family: var(--font-playfair-display);
+    @include media-breakpoint-up(sm) {
+      font-size: 72px;
+    }
+  }
+  &__ville {
+    text-transform: uppercase;
+  }
+  .card {
+    border: none;
+    text-align: center;
+    opacity: 1;
+    transition: all 0.3s ease-in;
+    &:hover {
+      opacity: 0.8;
+    }
+    img {
+      border-radius: 1.75rem;
+    }
+    .btn {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0);
+      transition: all 0.2s;
+      i {
+        display: block;
+      }
+    }
+    &:hover {
+      .card-title {
+        color: map.get($theme-colors, "primary");
+      }
+      .btn {
+        opacity: 1;
+        visibility: visible;
+        transform: scale(1);
+      }
+    }
+    .card-title {
+      font-size: 24px;
+      text-transform: uppercase;
+      transition: all 0.4s ease-in;
+    }
+    .card-text {
+      text-transform: uppercase;
+    }
+  }
+  .slick-slider {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    &.slick-initialized {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+  &__property {
+    margin-bottom: 0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding-left: 20px;
+    &__title {
+    }
+    &__subtitle {
+    }
+  }
+  &__plans__tab-content {
+    img {
+      position: relative !important;
+    }
+  }
+  #projet-plans {
+    border: none;
+    button {
+      border: none;
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 14px;
+      color: map.get($theme-colors, "dark");
+      &:hover,
+      .active {
+        color: map.get($theme-colors, "primary");
+      }
+    }
+  }
+  &__brochure {
+    width: 200px;
+    height: 300px;
+    border: 2px dashed map.get($theme-colors, "primary");
+    border-radius: 8px;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: map.get($theme-colors, "primary");
+    transition: all 0.4s ease-in;
+    cursor: pointer;
+    i {
+      font-size: 45px;
+    }
+    a {
+      text-decoration: none;
+      color: map.get($theme-colors, "primary");
+    }
+    &:hover {
+      color: map.get($theme-colors, "light");
+      background-color: map.get($theme-colors, "primary");
+      a {
+        color: map.get($theme-colors, "light");
+      }
+    }
+  }
+  &__map {
+    border-radius: 8px;
+  }
+  &__address {
+    p {
+      margin: 0;
+    }
+    @include media-breakpoint-up(sm) {
+      padding-left: 40px;
+    }
+  }
+
+  &__form {
+    border-radius: 8px;
+    background-color: #f9faf1;
+
+    @include media-breakpoint-up(sm) {
+      padding: 60px;
+    }
+  }
+}

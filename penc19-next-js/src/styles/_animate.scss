@@ -1,0 +1,41 @@
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Apply the animation to the body or any component */
+@mixin fade-in() {
+  animation: fadeIn 0.2s ease-in-out forwards;
+}
+
+.fade-in {
+  @include fade-in;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate(15px, 15px);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translate(10px, 10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* Apply the animation to the body or any component */
+@mixin fade-in-up() {
+  animation: fadeInUp 0.1s ease-in-out forwards;
+}
+
+.fade-in-up {
+  @include fade-in-up;
+}

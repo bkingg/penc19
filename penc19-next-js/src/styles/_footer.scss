@@ -1,0 +1,44 @@
+.footer {
+  background-color: transparent;
+  color: map.get($theme-colors, "dark");
+  padding-top: 100px;
+  @include media-breakpoint-up(sm) {
+    padding-top: 135px;
+  }
+  i {
+    color: map.get($theme-colors, "light");
+  }
+  .nav-item {
+    margin-bottom: 30px;
+  }
+  a.nav-link {
+    color: map.get($theme-colors, "light");
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__heading {
+    font-family: var(--font-playfair-display);
+    @include media-breakpoint-up(sm) {
+      font-size: 22px;
+      text-transform: uppercase;
+      margin-bottom: 35px;
+    }
+  }
+  &__address {
+    strong {
+      font-weight: normal;
+    }
+    p {
+      margin: 0;
+    }
+    a {
+      color: map.get($theme-colors, "light");
+    }
+  }
+  &__newsletter {
+  }
+  &__social {
+    font-size: 1.25rem;
+  }
+}

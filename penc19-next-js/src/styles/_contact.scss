@@ -1,0 +1,9 @@
+.contact {
+  &__address {
+    strong {
+      font-family: var(--font-playfair-display);
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+  }
+}

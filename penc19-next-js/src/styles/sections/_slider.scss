@@ -1,0 +1,54 @@
+.section__slider {
+  .carousel-image {
+    filter: brightness(70%);
+  }
+  .carousel-caption {
+    h3 {
+      text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+      color: map.get($theme-colors, "light");
+      text-transform: uppercase;
+    }
+
+    p {
+      color: map.get($theme-colors, "light");
+      display: none;
+    }
+
+    @include media-breakpoint-up(sm) {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      &__wrapper {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        position: absolute;
+        &.left {
+          transform: translateX(-50%);
+          text-align: left;
+          left: 0;
+          padding-left: 50%;
+          padding-right: 25px;
+        }
+        &.right {
+          transform: translateX(50%);
+          text-align: right;
+          right: 0;
+          padding-right: 50%;
+          padding-left: 25px;
+        }
+      }
+      h3 {
+        font-size: 80px;
+        color: map.get($theme-colors, "light");
+        text-shadow: none;
+      }
+      p {
+        display: block;
+      }
+    }
+  }
+}
