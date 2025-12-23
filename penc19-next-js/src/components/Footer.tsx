@@ -4,16 +4,6 @@ import { groq, PortableText, SanityDocument } from "next-sanity";
 import Link from "next/link";
 import Image from "next/image";
 
-interface FooterMenu {
-  _key: string;
-  title: string;
-  menu: MenuItems;
-}
-
-interface MenuItems {
-  items: MenuItem[];
-}
-
 interface MenuItem {
   _key: string;
   title: string;
@@ -33,18 +23,16 @@ export default async function Footer() {
     footerBgImage,
     footerLogo,
     footerDescription,
-    footerMenus[]{
-      _key, title, menu->{
-        items[]{
-          _key,
-          title,
-          linkType,
-          internalLink->{
-            _type,
-            slug
-          },
-          externalUrl
-        }
+    footerMenu->{
+      items[]{
+        _key,
+        title,
+        linkType,
+        internalLink->{
+          _type,
+          slug
+        },
+        externalUrl
       }
     },
     facebook,
@@ -65,7 +53,7 @@ export default async function Footer() {
   const siteSettings = await sanityFetch<SanityDocument>({
     query: SITE_SETTINGS_QUERY,
   });
-  const footerMenus = siteSettings.footerMenus;
+  console.log("footer menu", siteSettings.footerMenu);
   return (
     <footer className="footer">
       <div className="container">
@@ -95,30 +83,27 @@ export default async function Footer() {
             <PortableText value={siteSettings.email} />
             <PortableText value={siteSettings.phone} />
           </div>
-          {footerMenus?.map(({ _key, title, menu }: FooterMenu) => {
-            console.log("menu", menu);
-            return (
-              <div key={_key} className="col-sm-6 col-md-3 mb-3">
-                <h5 className="footer__heading">{title}</h5>
-                <ul className="nav flex-column">
-                  {menu.items?.map((item: MenuItem) => (
-                    <li className="nav-item mb-2" key={item._key}>
-                      <Link
-                        className="nav-link p-0"
-                        href={
-                          item.linkType === "internal"
-                            ? `/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
-                            : item.externalUrl
-                        }
-                      >
-                        {item.title}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+          {
+            <div className="col-sm-6 col-md-3 mb-3">
+              <ul className="nav flex-column">
+                {siteSettings.footerMenu.items?.map((item: MenuItem) => (
+                  <li className="nav-item mb-2" key={item._key}>
+                    <Link
+                      className="nav-link p-0"
+                      href={
+                        item.linkType === "internal"
+                          ? `/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
+                          : item.externalUrl
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          }
+          ;
           <div className="footer__newsletter col-sm-6 col-md-3 mb-3">
             <form>
               <div className="row d-flex align-items-center">
