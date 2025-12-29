@@ -157,6 +157,17 @@ input {
 //   outline: 1px red dotted;
 // }
 
-.vidaloka {
-  font-family: var(--font-playfair-display);
+.mono {
+  font-family: var(--font-mono);
+}
+
+.donate-button {
+  background-color: map.get($theme-colors, "secondary");
+  color: map.get($theme-colors, "dark");
+  border: none;
+  &:hover {
+    background-color: darken(map.get($theme-colors, "secondary"), 10%);
+    color: map.get($theme-colors, "dark");
+  }
+  border-radius: 8px;
 }
