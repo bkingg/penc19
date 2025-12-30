@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  background-color: map.get($theme-colors, "light");
+  background-color: map.get($theme-colors, "primary");
   transition: all 0.4s;
   box-shadow: 0 10px 15px rgba(map.get($theme-colors, "dark"), 0.1);
   padding: 0;
@@ -23,11 +23,7 @@
     border: none;
   }
   .navbar-toggler-icon {
-    $encoded-color: str-replace(
-      #{map.get($theme-colors, "primary")},
-      "#",
-      "%23"
-    );
+    $encoded-color: str-replace(#{map.get($theme-colors, "light")}, "#", "%23");
     border: none;
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='#{$encoded-color}' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
   }
@@ -36,12 +32,12 @@
     margin-right: -15px;
     .nav-link {
       padding: 10px;
-      color: map.get($theme-colors, "primary");
+      color: map.get($theme-colors, "light");
       font-weight: bold;
       &:hover,
       &.show {
-        background-color: map.get($theme-colors, "primary");
-        color: map.get($theme-colors, "light");
+        background-color: map.get($theme-colors, "light");
+        color: map.get($theme-colors, "primary");
       }
       &.dropdown-toggle {
         &:after {
@@ -56,7 +52,7 @@
     }
   }
   .dropdown-menu {
-    background-color: map.get($theme-colors, "light");
+    background-color: map.get($theme-colors, "primary");
     margin: 0;
     &.show {
       padding-left: 10px;
@@ -106,7 +102,7 @@
         content: " ";
         width: 100%;
         height: 3px;
-        background-color: map.get($theme-colors, "primary");
+        background-color: map.get($theme-colors, "light");
         transform: scaleX(0);
         display: block;
         transition: all 0.4s;
@@ -117,7 +113,7 @@
         opacity: 0.7;
         cursor: pointer;
         background-color: transparent;
-        color: map.get($theme-colors, "primary");
+        color: map.get($theme-colors, "light");
         span:after {
           transform: scaleX(1);
         }
@@ -139,27 +135,27 @@
       @include fade-in-up;
       padding: 0;
       margin: 0;
-      background-color: map.get($theme-colors, "light");
+      background-color: map.get($theme-colors, "primary");
       border: none;
-      border-top: 4px solid map.get($theme-colors, "primary");
+      border-top: 4px solid map.get($theme-colors, "light");
       .nav-link {
         width: 250px;
         white-space: collapse;
-        color: map.get($theme-colors, "primary");
+        color: map.get($theme-colors, "light");
         &:after {
           display: none;
         }
         &:hover,
         &.show {
-          background-color: map.get($theme-colors, "primary");
-          color: map.get($theme-colors, "light");
+          background-color: map.get($theme-colors, "light");
+          color: map.get($theme-colors, "primary");
         }
       }
     }
     .nav-link {
-      color: map.get($theme-colors, "primary");
+      color: map.get($theme-colors, "light");
       &:hover {
-        color: map.get($theme-colors, "primary");
+        color: map.get($theme-colors, "light");
       }
     }
     .dropdown .dropdown {
@@ -168,7 +164,7 @@
       }
       &:hover > .nav-link,
       &:hover .nav-link:hover {
-        background-color: map.get($theme-colors, "primary");
+        background-color: map.get($theme-colors, "light");
         color: #212529;
       }
     }

@@ -5,17 +5,8 @@
   @include media-breakpoint-up(sm) {
     padding-top: 135px;
   }
-  i {
-    color: map.get($theme-colors, "light");
-  }
   .nav-item {
     margin-bottom: 30px;
-  }
-  a.nav-link {
-    color: map.get($theme-colors, "light");
-    &:hover {
-      text-decoration: underline;
-    }
   }
   &__heading {
     font-family: var(--font-playfair-display);
@@ -32,14 +23,14 @@
     p {
       margin: 0;
     }
-    a {
-      color: map.get($theme-colors, "light");
-    }
   }
   &__newsletter {
   }
   &__social {
-    font-size: 1.25rem;
+    font-size: 2rem;
+    a i {
+      color: map.get($theme-colors, "primary");
+    }
   }
   h5 {
     text-transform: none;
