@@ -12,7 +12,7 @@ export default function PhotoGallery({ section }: PhotoGallerySectionProps) {
       <h2 className="section-title mb-5">Gallery</h2>
 
       <div className="masonry">
-        {section.photos.map((photo, i) => (
+        {section.photos.map((photo) => (
           <div key={photo._key} className="masonry-item mb-4">
             <div
               className="masonry-img-wrapper"
