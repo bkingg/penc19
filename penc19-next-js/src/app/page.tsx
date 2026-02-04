@@ -9,6 +9,7 @@ export default async function Home() {
   ][0]{
     _id, 
     sections[]{
+      _type,
       ...,
       "brochureUrl": brochure.asset->url,
       services[]->{
@@ -17,7 +18,22 @@ export default async function Home() {
       projets[]->{
         _id, title, ville, slug, image
       },
-      temoignages
+      temoignages,
+      _type == "reference" => @->{  
+        title,
+        photos[]{
+          _key,
+          asset->{
+            _id,
+            url,
+            metadata {
+              dimensions
+            }
+          },
+          alt
+        }
+      },
+      _type != "reference" => @
     },
   }`;
 

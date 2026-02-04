@@ -150,6 +150,11 @@ export interface VideoSectionType extends BaseSection {
   url: string;
 }
 
+export interface PhotoGallerySectionType extends BaseSection {
+  _type: "reference";
+  photos: SanityImageAssetDocument[];
+}
+
 export type Section =
   | RichTextSectionType
   | VideoSectionType
@@ -161,4 +166,5 @@ export type Section =
   | LatestArticlesSectionType
   | ServicesSectionType
   | TeamSectionType
-  | TemoignagesSectionType;
+  | TemoignagesSectionType
+  | PhotoGallerySectionType;

@@ -9,12 +9,14 @@ import MediaTextSection from "./MediaTextSection";
 import TeamSection from "./TeamSection";
 import TemoignagesSection from "./TemoignagesSection";
 import VideoSection from "./VideoSection";
+import PhotoGallerySection from "./PhotoGallerySection";
 import {
   CallToActionSectionType,
   FAQSectionType,
   LatestArticlesSectionType,
   LogoListSectionType,
   MediaTextSectionType,
+  PhotoGallerySectionType,
   RichTextSectionType,
   Section,
   ServicesSectionType,
@@ -29,6 +31,7 @@ interface SectionsProps {
 }
 
 export default async function Sections({ sections }: SectionsProps) {
+  console.log("sections", sections);
   return (
     <>
       {sections.map(
@@ -97,6 +100,12 @@ export default async function Sections({ sections }: SectionsProps) {
             <TemoignagesSection
               key={section._key}
               section={section as TemoignagesSectionType}
+            />
+          )) ||
+          (section._type == "reference" && (
+            <PhotoGallerySection
+              key={section._key}
+              section={section as PhotoGallerySectionType}
             />
           ))
       )}

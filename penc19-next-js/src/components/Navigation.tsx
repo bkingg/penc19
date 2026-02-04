@@ -98,6 +98,7 @@ export default function Navigation({ siteSettings }: NavigationProps) {
                 style={{
                   objectFit: "contain",
                   objectPosition: "left",
+                  padding: "8px 0",
                 }}
               />
             )}
