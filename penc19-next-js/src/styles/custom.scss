@@ -55,8 +55,7 @@ body {
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 94vh;
-  padding-bottom: 4.5em;
+  min-height: 100vh;
   z-index: 2;
 }
 
@@ -70,8 +69,9 @@ h4,
 h5,
 h6 {
   font-family: var(--font-playfair-display);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
+  letter-spacing: 1.4px;
   text-transform: uppercase;
   text-decoration: none;
 }

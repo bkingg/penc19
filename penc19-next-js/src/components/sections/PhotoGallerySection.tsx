@@ -9,25 +9,25 @@ interface PhotoGallerySectionProps {
 export default function PhotoGallery({ section }: PhotoGallerySectionProps) {
   return (
     <section className="container py-5">
-      <h2 className="section-title mb-5">Gallery</h2>
+      <h2 className="section-title mb-5 text-center">Gallery</h2>
 
       <div className="masonry">
-        {section.photos.map((photo) => (
-          <div key={photo._key} className="masonry-item mb-4">
-            <div
-              className="masonry-img-wrapper"
-              style={{ position: "relative", width: "100%", height: "400px" }}
-            >
+        {section.photos.map((photo) => {
+          const imageUrl = urlFor(photo).width(1200).url();
+
+          return (
+            <div key={photo._key} className="masonry-item">
               <Image
-                src={urlFor(photo).width(1000).url()}
+                src={imageUrl}
                 alt={photo._alt || "Gallery Image"}
-                fill
+                width={photo.asset?.metadata?.dimensions?.width || 800}
+                height={photo.asset?.metadata?.dimensions?.height || 1000}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="masonry-img"
-                style={{ objectFit: "cover" }}
               />
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
