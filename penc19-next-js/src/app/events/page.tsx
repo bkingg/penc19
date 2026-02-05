@@ -60,6 +60,16 @@ export default async function Events() {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="masonry-img"
                   />
+                  <div className="event-caption">
+                    <h3 className="event-title">{event.title}</h3>
+                    <p className="event-date">
+                      {new Date(event.startDate).toLocaleDateString("fr-FR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
                 </div>
               </Link>
             );

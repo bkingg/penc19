@@ -4,8 +4,14 @@
 }
 
 .masonry-item {
+  background: map.get($theme-colors, "light");
   break-inside: avoid;
   margin-bottom: 1.5rem;
+  box-shadow: 0 3px 4px #9c8a83;
+  border-radius: 6px;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
 }
 
 /* Image styling */
@@ -13,15 +19,10 @@
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 6px;
-  box-shadow: 0 3px 4px #9c8a83;
-  transition:
-    transform 0.5s ease,
-    box-shadow 0.5s ease;
 }
 
 /* Artistic hover */
-.masonry-item:hover .masonry-img {
+.masonry-item:hover {
   transform: rotate(1deg);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
