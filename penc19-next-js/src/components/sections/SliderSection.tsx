@@ -22,7 +22,7 @@ export default function SliderSection({ section }: SliderSectionProps) {
                 src={slideImageUrl}
                 width={1200}
                 height={500}
-                alt={slide.title}
+                alt={slide.image.alt || slide.title || "Slider Image"}
                 className="d-block w-100 img-fluid carousel-image"
               />
               {(slide.title || slide.description) && (

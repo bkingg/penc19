@@ -14,7 +14,10 @@
     .event-title {
       font-size: 1.25rem;
       font-weight: bold;
-      color: map.get($theme-colors, "dark");
+      color: map.get($theme-colors, "primary");
+      a:hover & {
+        color: map.get($theme-colors, "dark");
+      }
     }
     .event-date {
       font-size: 0.9rem;

@@ -54,7 +54,7 @@ export default async function Events() {
                 <div className="masonry-item">
                   <Image
                     src={imageUrl}
-                    alt={event._alt || "Gallery Image"}
+                    alt={event.alt || "Gallery Image"}
                     width={event.asset?.metadata?.dimensions?.width || 800}
                     height={event.asset?.metadata?.dimensions?.height || 1000}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

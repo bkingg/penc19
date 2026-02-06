@@ -103,7 +103,7 @@ export interface SliderSectionType extends BaseSection {
 
 export interface Slide {
   _key: string;
-  image: object;
+  image: SanityImageAssetDocument;
   captionPosition: string;
   title: string;
   description: string;
