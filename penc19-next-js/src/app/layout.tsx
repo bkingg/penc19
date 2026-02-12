@@ -10,8 +10,7 @@ import Footer from "@/components/Footer";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import BackToTop from "@/components/BackToTop";
 import { Suspense } from "react";
-import { isValidLanguage } from "@/lib/i18n";
-import { notFound } from "next/navigation";
+import { defaultLanguage } from "@/lib/i18n";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
 import { sanityFetch } from "@/sanity/client";
@@ -45,13 +44,10 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ language: string }>;
 }>) {
-  const { language } = await params;
+  const urlParams = await params;
+  const language = urlParams.language || defaultLanguage;
 
   console.log("Language in RootLayout:", language);
-
-  if (!isValidLanguage(language)) {
-    notFound();
-  }
 
   const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
       // Header
