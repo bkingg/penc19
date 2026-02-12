@@ -14,6 +14,7 @@ const nextConfig = {
   },
   sassOptions: {
     quietDeps: true,
+    silenceDeprecations: ["import", "color-functions"],
   },
 };
 

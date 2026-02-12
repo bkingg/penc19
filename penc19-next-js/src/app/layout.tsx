@@ -10,6 +10,12 @@ import Footer from "@/components/Footer";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import BackToTop from "@/components/BackToTop";
 import { Suspense } from "react";
+import { isValidLanguage } from "@/lib/i18n";
+import { notFound } from "next/navigation";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
+import { sanityFetch } from "@/sanity/client";
+import { groq, SanityDocument } from "next-sanity";
 
 const playfair_display = Playfair_Display({
   subsets: ["latin"],
@@ -34,19 +40,72 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ language: string }>;
 }>) {
+  const { language } = await params;
+
+  console.log("Language in RootLayout:", language);
+
+  if (!isValidLanguage(language)) {
+    notFound();
+  }
+
+  const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
+      // Header
+      logo,
+      // Footer
+      footerBgImage,
+      footerLogo,
+      footerDescription,
+      footerMenu->{
+        items[]{
+          _key,
+          title,
+          linkType,
+          internalLink->{
+            _type,
+            slug
+          },
+          externalUrl
+        }
+      },
+      facebook,
+      twitter,
+      instagram,
+      linkedin,
+  
+      contactPageTitle,
+      contactPageImage,
+      showMap,
+      contactPageSubTitle,
+      contactPageDescription,
+      phone,
+      address,
+      email,
+    }`;
+
+  const siteSettings = await sanityFetch<SanityDocument>({
+    query: SITE_SETTINGS_QUERY,
+  });
+  console.log("footer menu", siteSettings.footerMenu);
+
   return (
-    <html lang="fr" className={playfair_display.variable}>
+    <html lang={language} className={playfair_display.variable}>
       <body className={`${mono.className}`}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <Suspense>
-          <AnimateOnScroll />
-        </Suspense>
-        <BackToTop />
+        <LanguageProvider language={language}>
+          <SiteSettingsProvider siteSettings={siteSettings}>
+            <Header language={language} />
+            <main>{children}</main>
+            <Footer language={language} />
+            <Suspense>
+              <AnimateOnScroll />
+            </Suspense>
+            <BackToTop />
+          </SiteSettingsProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

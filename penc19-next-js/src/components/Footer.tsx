@@ -15,8 +15,15 @@ interface MenuItem {
   externalUrl: string;
 }
 
-export default async function Footer() {
-  const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings"][0]{
+export default async function Footer({ language }: { language: string }) {
+  const SITE_SETTINGS_QUERY = groq`*[_type == "siteSettings" && language == $language][0]{
+    // Language
+    language,
+    "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+      title,
+      slug,
+      language
+    },
     // Header
     logo,
     // Footer
@@ -52,6 +59,7 @@ export default async function Footer() {
 
   const siteSettings = await sanityFetch<SanityDocument>({
     query: SITE_SETTINGS_QUERY,
+    params: { language }, // You can replace this with the actual language parameter
   });
   console.log("footer menu", siteSettings.footerMenu);
   return (
@@ -80,7 +88,9 @@ export default async function Footer() {
             <p>© 2025 Penc 19</p>
           </div>
           <div className="footer__address col-sm-8 mb-3">
-            <h5 className="mono mb-4">Connect with us</h5>
+            <h5 className="mono mb-4">
+              {language === "en" ? "Connect with us" : "Restez Connectés"}
+            </h5>
             <ul className="nav footer__social">
               {siteSettings.twitter && (
                 <li className="nav-item">
@@ -128,26 +138,32 @@ export default async function Footer() {
               )}
               <li>
                 <Link href="#" className="btn btn-sm btn-primary donate-button">
-                  Donate
+                  {language === "en" ? "Donate" : "Faire un don"}
                 </Link>
               </li>
             </ul>
             <div className="footer__newsletter mb-4">
               <form>
                 <div className="row d-flex align-items-center">
-                  <p>Join the Penc 19 Email list</p>
+                  <p>
+                    {language === "en"
+                      ? "Join the Penc 19 Email list"
+                      : "Rejoindre la Newsletter de Penc 19"}
+                  </p>
                   <div className="d-flex flex-column flex-sm-row w-100 gap-2">
                     <label htmlFor="newsletter1" className="visually-hidden">
-                      Adresse Email
+                      {language === "en" ? "Email address" : "Adresse Email"}
                     </label>
                     <input
                       id="newsletter1"
                       type="text"
                       className="form-control"
-                      placeholder="Email address"
+                      placeholder={
+                        language === "en" ? "Email address" : "Adresse Email"
+                      }
                     />
                     <button className="btn btn-primary" type="button">
-                      Subscribe
+                      {language === "en" ? "Subscribe" : "S'abonner"}
                     </button>
                   </div>
                 </div>
@@ -161,7 +177,7 @@ export default async function Footer() {
                     className="nav-link"
                     href={
                       item.linkType === "internal"
-                        ? `/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
+                        ? `/${language}/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
                         : item.externalUrl
                     }
                   >

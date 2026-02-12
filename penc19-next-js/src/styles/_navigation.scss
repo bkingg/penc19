@@ -1,3 +1,4 @@
+@use "sass:map";
 .header {
   position: sticky;
   top: 0;
@@ -66,6 +67,18 @@
     cursor: pointer;
     transition: all 0.4s;
     span {
+    }
+  }
+  .language-switcher {
+    display: flex;
+    gap: 10px;
+    .nav-link {
+      padding: 0;
+      color: map.get($theme-colors, "light");
+      font-weight: bold;
+      &:hover {
+        color: map.get($theme-colors, "primary");
+      }
     }
   }
   @include media-breakpoint-up(md) {

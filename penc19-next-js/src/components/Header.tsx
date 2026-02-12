@@ -13,6 +13,7 @@ const MENU_ITEM_FRAGMENT = groq`
 
 const SITE_SETTINGS_QUERY = groq`*[
   _type == "siteSettings"
+  && language == $language
 ][0]{
   logo,
   mainMenu->{
@@ -27,11 +28,18 @@ const SITE_SETTINGS_QUERY = groq`*[
       }
     }
   },
+  language,
+  "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+    title,
+    slug,
+    language
+  },
 }`;
 
-export default async function Header() {
+export default async function Header({ language }: { language: string }) {
   const siteSettings = await sanityFetch<SanityDocument>({
     query: SITE_SETTINGS_QUERY,
+    params: { language: language },
   });
 
   console.log(siteSettings);

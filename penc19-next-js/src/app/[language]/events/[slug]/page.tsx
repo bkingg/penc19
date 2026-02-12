@@ -14,14 +14,15 @@ let eventImageUrl: string;
 export default async function Event({
   params,
 }: {
-  params: Promise<{ slug: string[] }>;
+  params: Promise<{ language: string; slug: string[] }>;
 }) {
-  const { slug } = await params;
+  const { language, slug } = await params;
   const EVENT_QUERY = groq`
     *[
       _type == "event"
+      && language == $language
       && defined(slug.current)
-      && slug.current == "${slug}"
+      && slug.current == $slug
     ][0]{
       _id, 
       title, 
@@ -39,10 +40,18 @@ export default async function Event({
           _id, title, ville, slug, image
         },
         temoignages,
-      }
+      },
+      // Language
+      language,
+      "_translations": *[_type == "translation.metadata" && references(^._id)].translations[].value->{
+        title,
+        slug,
+        language
+      },
     }`;
   event = await sanityFetch<SanityDocument>({
     query: EVENT_QUERY,
+    params: { language, slug },
   });
 
   if (!event) notFound();
@@ -51,24 +60,26 @@ export default async function Event({
 
   return (
     <>
-      <PageHeader image={eventImageUrl}>
-        <h1 className="page__title">{event.title}</h1>
+      <PageHeader>
+        <h1 className="page__title">
+          {language === "en" ? "Events" : "Événements"}
+        </h1>
 
         <Breadcrumb className="page__header__breadcrumb">
-          <BreadcrumbItem href="/">Accueil</BreadcrumbItem>
-          <BreadcrumbItem href="/events" active>
-            Events
+          <BreadcrumbItem href="/">
+            {language === "en" ? "Home" : "Accueil"}
           </BreadcrumbItem>
-          <BreadcrumbItem href={`/events/${event.slug}`} active>
-            {event.title}
+          <BreadcrumbItem href={`/${language}/events`}>
+            {language === "en" ? "Events" : "Événements"}
           </BreadcrumbItem>
+          <BreadcrumbItem active>{event.title}</BreadcrumbItem>
         </Breadcrumb>
       </PageHeader>
       <div className="event">
         <div className="container section">
           <h2 className="event__title">{event.title}</h2>
           <p className="event__date">
-            {new Date(event.startDate).toLocaleDateString("fr-FR", {
+            {new Date(event.startDate).toLocaleDateString(language, {
               year: "numeric",
               month: "long",
               day: "numeric",

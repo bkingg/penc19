@@ -13,6 +13,8 @@ import {
   NavbarCollapse,
   NavbarToggle,
 } from "react-bootstrap";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface NavigationProps {
   siteSettings: SanityDocument;
@@ -31,6 +33,8 @@ interface MenuItem {
 }
 
 export default function Navigation({ siteSettings }: NavigationProps) {
+  const language = useLanguage();
+
   const menu = siteSettings.mainMenu;
 
   const [isSticky, setIsSticky] = useState(false);
@@ -69,7 +73,7 @@ export default function Navigation({ siteSettings }: NavigationProps) {
             key={item._key}
             href={
               item.linkType === "internal"
-                ? `/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
+                ? `/${language}/${item.internalLink?._type}s/${item.internalLink?.slug.current}`
                 : item.externalUrl
             }
           >
@@ -107,6 +111,9 @@ export default function Navigation({ siteSettings }: NavigationProps) {
         <NavbarToggle aria-controls="basic-navbar-nav" />
         <NavbarCollapse id="basic-navbar-nav">
           <Nav className="m-auto">{menuShow(menu.items)}</Nav>
+          <Nav>
+            <LanguageSwitcher />
+          </Nav>
         </NavbarCollapse>
       </Container>
     </Navbar>
