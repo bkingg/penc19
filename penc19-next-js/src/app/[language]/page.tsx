@@ -51,7 +51,7 @@ export default async function Home({
 
   const home = await sanityFetch<SanityDocument>({
     query: HOMEPAGE_QUERY,
-    params: { language: language },
+    params: { language },
   });
   return home?.sections && <Sections sections={home.sections} />;
 }

@@ -50,7 +50,7 @@ export default async function Header({ language }: { language: string }) {
 
   return (
     <>
-      <Navigation siteSettings={siteSettings} />
+      <Navigation language={language} siteSettings={siteSettings} />
     </>
   );
 }

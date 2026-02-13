@@ -14,10 +14,10 @@ import {
   NavbarToggle,
 } from "react-bootstrap";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { useLanguage } from "@/context/LanguageContext";
 
 interface NavigationProps {
   siteSettings: SanityDocument;
+  language: string;
 }
 
 interface MenuItem {
@@ -32,9 +32,10 @@ interface MenuItem {
   submenuItems: MenuItem[];
 }
 
-export default function Navigation({ siteSettings }: NavigationProps) {
-  const language = useLanguage();
-
+export default function Navigation({
+  siteSettings,
+  language,
+}: NavigationProps) {
   const menu = siteSettings.mainMenu;
 
   const [isSticky, setIsSticky] = useState(false);
@@ -90,7 +91,7 @@ export default function Navigation({ siteSettings }: NavigationProps) {
       className={`header ${isSticky ? "sticky" : ""}`}
     >
       <Container>
-        <NavbarBrand href="/">
+        <NavbarBrand href={"/" + language}>
           <div className="header__logo-wrapper">
             {siteSettings.logo && (
               <Image
