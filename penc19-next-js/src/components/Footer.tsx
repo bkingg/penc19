@@ -137,7 +137,10 @@ export default async function Footer({ language }: { language: string }) {
                 </li>
               )}
               <li>
-                <Link href="#" className="btn btn-sm btn-primary donate-button">
+                <Link
+                  href={`/${language}/donate`}
+                  className="btn btn-sm btn-primary donate-button"
+                >
                   {language === "en" ? "Donate" : "Faire un don"}
                 </Link>
               </li>
