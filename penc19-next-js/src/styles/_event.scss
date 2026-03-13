@@ -1,6 +1,5 @@
 .event {
   box-shadow: 0 3px 4px #9c8a83;
-  display: block;
   text-decoration: none;
 
   .masonry-item {
@@ -22,6 +21,44 @@
     .event-date {
       font-size: 0.9rem;
       color: map.get($theme-colors, "secondary");
+    }
+  }
+}
+
+.events {
+  &__filter {
+    .nav-link {
+      margin-right: 5px;
+      background-color: transparent;
+      border: 1px solid map.get($theme-colors, "primary");
+      border-radius: 25px;
+      color: map.get($theme-colors, "primary");
+      transition: all 0.3s ease;
+      &.active,
+      &:hover {
+        background-color: map.get($theme-colors, "primary");
+        color: map.get($theme-colors, "light");
+        font-weight: bold;
+      }
+    }
+  }
+
+  &__pagination {
+    .page-link {
+      color: map.get($theme-colors, "primary");
+      border-radius: 25px;
+      &:hover {
+        color: map.get($theme-colors, "dark");
+      }
+    }
+    .page-item.active,
+    .page-item:hover {
+      .page-link {
+        background-color: transparent;
+        border-color: transparent;
+        color: map.get($theme-colors, "dark");
+        font-weight: bold;
+      }
     }
   }
 }
